@@ -2,11 +2,13 @@ package com.skateboardshare.skateboardrestapi.controller;
 
 import com.skateboardshare.skateboardrestapi.models.Skateboard;
 import com.skateboardshare.skateboardrestapi.service.SkateboardJPAService_JPA;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
@@ -17,17 +19,14 @@ import static org.mockito.ArgumentMatchers.anyInt;
 @RunWith(MockitoJUnitRunner.class)
 class SkateboardControllerTest
 {
-    @InjectMocks
-    private SkateboardController skateboardController;
-
-    @Mock
     private SkateboardJPAService_JPA skateboardJPAService_jpa;
+
+    private SkateboardController skateboardController = Mockito.mock(SkateboardController.class);
 
     @Test
     void retrieveSkateboard()
     {
         //Arrange
-        skateboardController = Mockito.mock(SkateboardController.class);
         Optional<Skateboard> expected_skateboard = Optional.of(new Skateboard(2, "OWNER2", "TEST2", 45, 30, "LOCATION2", null, false));
         Mockito.when(skateboardController.retrieveSkateboard(anyInt())).thenReturn(expected_skateboard);
 
